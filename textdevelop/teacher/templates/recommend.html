@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block contents %}
+<div class="row mt-5">
+    <div class="col-12 text-center">
+        <h1>teacher recommend</h1>
+    </div>
+</div>
+<div class="row mt-5">
+  <div class="col-12">
+    {{ error }}
+  </div>
+</div>
+<div class="row mt-5">
+    <div class="col-12">
+        <form method="POST" action=".">
+            {% csrf_token %}
+            <!-- <div class="mb-3">
+              <label for="username" class="form-group">사용자 이름</label>
+              <input type="text" class="form-control" id="username" placeholder="사용자이름" name="username">
+            </div>                    
+            <div class="mb-3">
+              <label for="password" class="form-group">비밀번호</label>
+              <input type="password" class="form-control" id="password" placeholder="비밀번호" name="password">
+            </div>               -->
+            {% for field in form %}
+            <div class ="form-group">
+              <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+              <input type="{{ field.field.widget.input_type }}" class = "form-control" id="tags" placeholder="{{ field.label }}" name="{{ field.name }}" />
+            </div>
+            {% if field.errors %}
+            <span style="color: red">{{ field.errors }}</span>
+            {% endif %}
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">추천받기</button>
+          </form>
+    </div>
+</div>
+{% endblock %}
